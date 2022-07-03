@@ -2,6 +2,14 @@
 
 An InheritedWidget state management implementaton
 
+## Learning purpose
+
+This plugin was created for learning purpose about InheritedWidget and state management.
+
+The goal was to understand how popular state management plugins works by making a simple one.
+
+See [Official documentation](https://docs.flutter.dev/development/data-and-backend/state-mgmt/options#inheritedwidget--inheritedmodel) for further informations
+
 ## Features
 
 Manage your app state using `Watchers` for your states
