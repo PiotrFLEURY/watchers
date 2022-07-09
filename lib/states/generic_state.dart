@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-typedef ChangeCallback = void Function();
-
 /// GenericState is a ChangeNotifier implementation
 /// It is used to be listened by Watcher implementations
 /// This class is the state holder and its responsibility is to
