@@ -200,3 +200,50 @@ class CounterPage extends StatelessWidget {
 * ListState - For collections
 * NumericState - For numbers
 * GenericState - For any custom object that you want to watch
+
+## WatcherBuilder
+
+WatcherBuilder can be used for pages with multiple states like so
+
+```dart
+// First, override currentState getter in your state to define possible state names
+
+class EvenOddState extends NumericState {
+  EvenOddState(super.value);
+
+  @override
+  String get currentState => value % 2 == 0 ? 'even' : 'odd'; // here states are even and odd
+}
+
+// Now create a watcher using WatcherBuilder
+
+class EvenOrOdd extends WatcherBuilder<EvenOddState> {
+  EvenOrOdd({super.key, required super.state, required super.builders});
+
+  static EvenOrOdd of(BuildContext context) => Watcher.of<EvenOrOdd>(context);
+}
+
+// Then, use your watcher in your widget and give it each method to call for each state
+
+class EvenOddPage extends StatelessWidget {
+  
+  // ...
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: EvenOrOdd(
+        state: EvenOddState(0),
+        builders: {
+          'even': _buildEven,
+          'odd': _buildOdd,
+        },
+      ),
+    );
+  }
+
+  // ...
+
+}
+
+```
