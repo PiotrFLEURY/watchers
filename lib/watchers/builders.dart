@@ -5,17 +5,30 @@ import 'package:watchers/watchers/watcher.dart';
 /// Builder class handling content switching depending on the current state
 ///
 /// Provide multiple builders with different state names
+///
 /// MyWatcher(
+///
 ///   state: MyState(),
+///
 ///   builders: {
+///
 ///     'loading': _buildLoadingFunction,
+///
 ///     'error': _buildError,
+///
 ///     'showContent': _buildContentFunction,
+///
 ///     'makingCoffee': _teapot,
-///     '42': _answerToUniversAndEverythingElse
+///
+///     '42': _answerToUniversAndEverythingElse,
+///
 ///   }
+///
 /// )
 class WatcherBuilder<S extends GenericState> extends Watcher<S> {
+  /// Contains a map of WidgetBuilder by state name
+  /// the WidgetBuilder corresponding to the state name of the current state
+  /// will be build
   final Map<String, WidgetBuilder> builders;
 
   WatcherBuilder({
