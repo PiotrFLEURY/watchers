@@ -24,6 +24,9 @@ class GenericState<V> with ChangeNotifier {
     notifyListeners();
   }
 
+  /// Return the current "state" name
+  String get currentState => 'default';
+
   @override
   String toString() => _value.toString();
 }

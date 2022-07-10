@@ -1,4 +1,5 @@
 import 'package:example/pages/authentication/authentication_page.dart';
+import 'package:example/pages/even_odd/even_odd_page.dart';
 import 'package:example/pages/fibonnacci/fibonacci_page.dart';
 import 'package:example/pages/counter/counter_page.dart';
 import 'package:example/pages/home/home.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
             ),
         '/fibonnacci': (context) => const FibonnacciPage(),
         '/authentication': (context) => const AuthenticationPage(),
+        '/evenOdd': (context) => const EvenOddPage(),
       },
       initialRoute: initialRoute,
     );
