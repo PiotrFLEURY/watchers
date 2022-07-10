@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
           PageSelector(label: 'Fibonnacci', path: '/fibonnacci'),
           PageSelector(label: 'Messages', path: '/messages'),
           PageSelector(label: 'Authentication', path: '/authentication'),
+          PageSelector(label: 'EvenOdd', path: '/evenOdd'),
         ],
       ),
     );
