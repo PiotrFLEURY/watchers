@@ -14,6 +14,8 @@ class HomePage extends StatelessWidget {
           PageSelector(label: 'Messages', path: '/messages'),
           PageSelector(label: 'Authentication', path: '/authentication'),
           PageSelector(label: 'EvenOdd', path: '/evenOdd'),
+          PageSelector(label: 'Events', path: '/events'),
+          PageSelector(label: 'EventsAndBuilders', path: '/eventsAndBuilders'),
         ],
       ),
     );

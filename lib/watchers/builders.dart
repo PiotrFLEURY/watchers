@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:watchers/states/generic_state.dart';
+import 'package:watchers/states/multi_state.dart';
 import 'package:watchers/watchers/watcher.dart';
 
 /// Builder class handling content switching depending on the current state
@@ -25,7 +25,7 @@ import 'package:watchers/watchers/watcher.dart';
 ///   }
 ///
 /// )
-class WatcherBuilder<S extends GenericState> extends Watcher<S> {
+class WatcherBuilder<S extends MultiState> extends Watcher<S> {
   /// Contains a map of WidgetBuilder by state name
   /// the WidgetBuilder corresponding to the state name of the current state
   /// will be build
@@ -35,6 +35,7 @@ class WatcherBuilder<S extends GenericState> extends Watcher<S> {
     super.key,
     required super.state,
     required this.builders,
+    super.events,
   }) : super(
           builder: (context) => _WatcherBuilder(
             state,
@@ -44,7 +45,7 @@ class WatcherBuilder<S extends GenericState> extends Watcher<S> {
 }
 
 class _WatcherBuilder extends StatelessWidget {
-  final GenericState state;
+  final MultiState state;
   final Map<String, WidgetBuilder> builders;
 
   const _WatcherBuilder(this.state, this.builders);
