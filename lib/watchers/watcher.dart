@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:watchers/states/generic_state.dart';
+import 'package:watchers/watchers.dart';
 
 /// Watcher is an InheritedWidget implementation
 /// combined with an AnimatedBuilder
@@ -8,10 +8,14 @@ class Watcher<S extends GenericState> extends InheritedWidget {
   /// The current state value of the Watcher
   final S state;
 
+  /// The event methods to trigger on events
+  final Map<String, Function> events;
+
   Watcher({
     Key? key,
     required this.state,
     required Widget Function(BuildContext) builder,
+    this.events = const {},
   }) : super(
           key: key,
           // AnimatedBuilder will refresh descendant widgets
@@ -27,6 +31,16 @@ class Watcher<S extends GenericState> extends InheritedWidget {
     final U? result = context.dependOnInheritedWidgetOfExactType<U>();
     assert(result != null, 'No InheritedState of type $U found in context');
     return result!;
+  }
+
+  /// Fire an event
+  void fireEvent(String eventName) {
+    final event = events[eventName];
+    if (event == null) {
+      throw Exception('Event $eventName not found');
+    }
+
+    event.call();
   }
 
   @override

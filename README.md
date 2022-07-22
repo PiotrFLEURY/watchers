@@ -200,6 +200,7 @@ class CounterPage extends StatelessWidget {
 * ListState - For collections
 * NumericState - For numbers
 * GenericState - For any custom object that you want to watch
+* MultiState - For multiple state management in the same widget
 
 ## WatcherBuilder
 
@@ -208,7 +209,7 @@ WatcherBuilder can be used for pages with multiple states like so
 ```dart
 // First, override currentState getter in your state to define possible state names
 
-class EvenOddState extends NumericState {
+class EvenOddState extends MultiState<int> {
   EvenOddState(super.value);
 
   @override
@@ -247,3 +248,97 @@ class EvenOddPage extends StatelessWidget {
 }
 
 ```
+
+## Events
+
+Events can be used to trigger actions without any repaint of the screen
+
+```dart
+
+// Create your Watcher 
+class MyWatcher extends Watcher<MyState> {
+
+  // Declare some events
+  static const String httpError = 'httpError';
+
+  MyWatcher(
+    super.key,
+    required super.state,
+    required super.builder,
+    // require event callback
+    required Function onHttpError,
+  ) : super(
+    events: {
+      // map event with associated callback
+      httpError: onHttpError,
+    },
+  );
+
+  static MyWatcher of(BuildContext context) => Watcher.of<MyWatcher>(context);
+
+  Future<void> fetchData(String parameter) async {
+    
+    try {
+      api.getData(parameter)
+    } catch (e) {
+      // manage error
+      
+      // fire httpError event - will call onHttpError
+      fireEvent(httpError);
+
+    }
+    
+    
+  }
+}
+
+// Optional extension for cleaner code
+extension EventsExtension on BuildContext {
+  
+  Events get events => Events.of(this);
+
+}
+
+// Create a widget using your event watcher
+class EventsPage extends StatelessWidget {
+  
+  const EventsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Events(
+      state: EventsState(),
+      // provide required event callback
+      onHttpError: () => _onHttpError(context),
+      builder: (context) => _EventsPage(
+        buttonPressed: () => _buttonPressed(context),
+      ),
+    );
+  }
+
+  void _buttonPressed(BuildContext context) {
+    // call watcher operation
+    context.events.fetchData('parameter');
+  }
+
+  /// callback method called when Watcher fire httpError event
+  void _onHttpError(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('HTTP error'),
+      ),
+    );
+  }
+}
+
+```
+
+## Complex case
+
+Events and Builders can be mixed for complex screen management.
+
+For example, Builders can manage screen content throught different steps of a loading process and Events can catch failures, form validation, etc.
+
+Concrete example is available in example app.
+
+See [events_and_builders_page.dart](./example/lib/pages/events_and_builders/events_and_builders_page.dart)

@@ -7,7 +7,7 @@ class EvenOrOdd extends WatcherBuilder<EvenOddState> {
   static EvenOrOdd of(BuildContext context) => Watcher.of<EvenOrOdd>(context);
 }
 
-class EvenOddState extends NumericState {
+class EvenOddState extends MultiState<int> {
   EvenOddState(super.number) {
     _infiniteLoop();
   }

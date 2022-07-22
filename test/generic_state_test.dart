@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watchers/states/generic_state.dart';
+import 'package:watchers/watchers.dart';
 
 class User {
   final String name;
@@ -35,17 +36,6 @@ void main() {
       expect(result, otherUser);
     });
 
-    test('currentState', () {
-      // GIVEN
-      const user = User('toto', 42);
-      final state = GenericState(user);
-
-      // THEN
-      final result = state.currentState;
-
-      // THEN
-      expect(result, 'default');
-    });
     test('toString', () {
       // GIVEN
       const user = User('toto', 42);
