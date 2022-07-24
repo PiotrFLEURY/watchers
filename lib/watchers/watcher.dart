@@ -4,7 +4,7 @@ import 'package:watchers/watchers.dart';
 /// Watcher is an InheritedWidget implementation
 /// combined with an AnimatedBuilder
 /// listenning for changes of a GenericState implementation
-class Watcher<S extends GenericState> extends InheritedWidget {
+class Watcher<S extends GenericState> extends InheritedNotifier {
   /// The current state value of the Watcher
   final S state;
 
@@ -18,11 +18,9 @@ class Watcher<S extends GenericState> extends InheritedWidget {
     this.events = const {},
   }) : super(
           key: key,
-          // AnimatedBuilder will refresh descendant widgets
-          // after every state change
-          child: AnimatedBuilder(
-            animation: state,
-            builder: (context, _) => builder(context),
+          notifier: state,
+          child: Builder(
+            builder: builder,
           ),
         );
 
@@ -44,5 +42,9 @@ class Watcher<S extends GenericState> extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(covariant Watcher oldWidget) => false;
+  bool updateShouldNotify(covariant Watcher oldWidget) {
+    bool shouldNotify = state.value != oldWidget.state.value;
+    debugPrint('updateShouldNotify: $shouldNotify');
+    return shouldNotify;
+  }
 }

@@ -28,6 +28,18 @@
             "type": "dart"
         },
         {
+            "name": "example (web server)",
+            "cwd": "example",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "web-server",
+                "--web-port=3000",
+                "--web-hostname=0.0.0.0",
+            ]
+        },
+        {
             "name": "example (profile mode)",
             "cwd": "example",
             "request": "launch",
