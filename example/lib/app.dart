@@ -6,6 +6,7 @@ import 'package:example/pages/fibonnacci/fibonacci_page.dart';
 import 'package:example/pages/counter/counter_page.dart';
 import 'package:example/pages/home/home.dart';
 import 'package:example/pages/messages/messages_page.dart';
+import 'package:example/pages/simon/simon_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/evenOdd': (context) => const EvenOddPage(),
         '/events': (context) => const EventsPage(),
         '/eventsAndBuilders': (context) => const EventsAndBuildersPage(),
+        '/simon': (context) => const SimonPage(),
       },
       initialRoute: initialRoute,
     );
