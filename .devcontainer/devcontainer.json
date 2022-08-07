@@ -1,0 +1,27 @@
+{
+    "image": "cirrusci/flutter",
+    "forwardPorts": [3000],
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            "extensions": [
+                "felixangelov.bloc",
+                
+                "equinusocio.vsc-community-material-theme",
+                "equinusocio.vsc-material-theme-icons",
+                "equinusocio.vsc-material-theme",
+                
+                "dart-code.dart-code",
+                "dart-code.flutter",
+                
+                "github.copilot",
+                
+                "rapidapi.vscode-rapidapi-client",
+                
+                "eamodio.gitlens",
+                "usernamehw.errorlens",
+                "pflannery.vscode-versionlens"
+            ]
+        }
+    }
+}
